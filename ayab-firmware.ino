@@ -168,8 +168,11 @@ void setup() {
 
   pinMode(LED_PIN_A, OUTPUT);
   pinMode(LED_PIN_B, OUTPUT);
-  digitalWrite(LED_PIN_A, 1);
-  digitalWrite(LED_PIN_B, 1);
+  digitalWrite(LED_PIN_A, HIGH);
+  digitalWrite(LED_PIN_B, HIGH);
+
+  pinMode(PIEZO_PIN, OUTPUT);
+  digitalWrite(PIEZO_PIN, LOW);
 
   pinMode(DBG_BTN_PIN, INPUT);
 
