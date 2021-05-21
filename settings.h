@@ -28,6 +28,9 @@ This file is part of AYAB.
 
 //  #define DBG_NOMACHINE  // Turn on to use DBG_BTN as EOL Trigger
 
+// Define target hardware.
+#define KH930
+
 #ifdef KH910
   #warning USING MACHINETYPE KH910
 #else
