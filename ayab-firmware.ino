@@ -19,7 +19,6 @@ This file is part of AYAB.
     http://ayab-knitting.com
 */
 
-
 /*
  * INCLUDES
  */
