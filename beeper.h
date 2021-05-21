@@ -39,8 +39,11 @@ class Beeper {
   /*! Beep to indicate the end the knitting pattern */
   void endWork();
 
+  void happyBirthday();
+
  private:
   void beep(byte length);
+  void beep(float freq, int durationMs, int pauseDurationMs);
 };
 
 #endif  // BEEPER_H_

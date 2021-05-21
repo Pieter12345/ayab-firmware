@@ -177,6 +177,10 @@ void setup() {
   attachInterrupt(0, isr_encA, CHANGE);
 
   knitter = new Knitter(&packetSerial);
+
+  // Beep happy birthday on startup.
+  Beeper* beeper = new Beeper();
+  beeper->happyBirthday();
 }
 
 

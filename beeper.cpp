@@ -22,6 +22,15 @@ This file is part of AYAB.
 #include "Arduino.h"
 #include "./beeper.h"
 
+#define NOTE_C5 523.25
+#define NOTE_D5 587.33
+#define NOTE_E5 659.25
+#define NOTE_F5 698.46
+#define NOTE_G5 783.99
+#define NOTE_A5 880.00
+#define NOTE_BES5 932.33
+#define NOTE_B5 987.77
+#define NOTE_C6 1046.50
 
 Beeper::Beeper() {
   // Intentionally left blank
@@ -42,6 +51,52 @@ void Beeper::endWork() {
   beep(10);
 }
 
+/*
+ * Beeps happy birthday.
+ * Notes:
+ *   C C D C F E
+ *   C C D C G F
+ *   C C C+ A F E D
+ *   B B A F G F
+ */
+void Beeper::happyBirthday() {
+	int duration1 = 350;
+	int pause1 = 10;
+	int duration2 = duration1 * 2;
+	int pause2 = pause1 * 2;
+	int duration3 = duration1 * 4;
+	int pause3 = pause1 * 4;
+	
+	beep(NOTE_C5, duration1, pause1);
+	beep(NOTE_C5, duration1, pause1);
+	beep(NOTE_D5, duration2, pause2);
+	beep(NOTE_C5, duration2, pause2);
+	beep(NOTE_F5, duration2, pause2);
+	beep(NOTE_E5, duration3, pause3);
+	
+	beep(NOTE_C5, duration1, pause1);
+	beep(NOTE_C5, duration1, pause1);
+	beep(NOTE_D5, duration2, pause2);
+	beep(NOTE_C5, duration2, pause2);
+	beep(NOTE_G5, duration2, pause2);
+	beep(NOTE_F5, duration3, pause3);
+	
+	beep(NOTE_C5, duration1, pause1);
+	beep(NOTE_C5, duration1, pause1);
+	beep(NOTE_C6, duration2, pause2);
+	beep(NOTE_A5, duration2, pause2);
+	beep(NOTE_F5, duration2, pause2);
+	beep(NOTE_E5, duration2, pause2);
+	beep(NOTE_D5, duration3, pause3);
+	
+	beep(NOTE_BES5, duration1, pause1);
+	beep(NOTE_BES5, duration1, pause1);
+	beep(NOTE_A5, duration2, pause2);
+	beep(NOTE_F5, duration2, pause2);
+	beep(NOTE_G5, duration2, pause2);
+	beep(NOTE_F5, duration3, pause3);
+}
+
 
 /*
  * PRIVATE METHODS
@@ -54,4 +109,17 @@ void Beeper::beep(byte length) {
     delay(BEEPDELAY);
   }
   analogWrite(PIEZO_PIN, 0);
+}
+
+
+void Beeper::beep(float freq, int durationMs, int pauseDurationMs) {
+	int delayUs = (int) (1000000L / freq);
+	long durationUs = durationMs * 1000L;
+	for(long i = 0; i < durationUs; i += 2 * delayUs) {
+		digitalWrite(PIEZO_PIN, HIGH);
+		delayMicroseconds(delayUs);
+		digitalWrite(PIEZO_PIN, LOW);
+		delayMicroseconds(delayUs);
+	}
+	delay(pauseDurationMs);
 }
