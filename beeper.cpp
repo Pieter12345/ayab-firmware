@@ -31,6 +31,8 @@ This file is part of AYAB.
 #define NOTE_BES5 932.33
 #define NOTE_B5 987.77
 #define NOTE_C6 1046.50
+#define NOTE_A7 3520.00
+#define NOTE_C8 4186.01
 
 Beeper::Beeper() {
   // Intentionally left blank
@@ -38,17 +40,19 @@ Beeper::Beeper() {
 
 
 void Beeper::ready() {
-  beep(5);
+	beep(NOTE_C8, 100, 10);
+	beep(NOTE_A7, 200, 0);
 }
 
 
 void Beeper::finishedLine() {
-  beep(3);
+	beep(NOTE_C5, 100, 10);
+	beep(NOTE_C6, 100, 0);
 }
 
 
 void Beeper::endWork() {
-  beep(10);
+	this->happyBirthday();
 }
 
 /*
@@ -102,13 +106,13 @@ void Beeper::happyBirthday() {
  * PRIVATE METHODS
  */
 void Beeper::beep(byte length) {
-  for (int i=0; i < length; i++) {
-    analogWrite(PIEZO_PIN, 255);
-    delay(BEEPDELAY);
-    analogWrite(PIEZO_PIN, 235);
-    delay(BEEPDELAY);
-  }
-  analogWrite(PIEZO_PIN, 0);
+	for (int i = 0; i < length; i++) {
+		analogWrite(PIEZO_PIN, 255);
+		delay(BEEPDELAY);
+		analogWrite(PIEZO_PIN, 235);
+		delay(BEEPDELAY);
+	}
+	analogWrite(PIEZO_PIN, 0);
 }
 
 
