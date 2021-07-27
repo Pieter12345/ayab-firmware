@@ -159,9 +159,6 @@ void onPacketReceived(const uint8_t* buffer, size_t size)
  * SETUP
  */
 void setup() {
-  packetSerial.begin(SERIAL_BAUDRATE);
-  packetSerial.setPacketHandler(&onPacketReceived);
-
   pinMode(ENC_PIN_A, INPUT);
   pinMode(ENC_PIN_B, INPUT);
   pinMode(ENC_PIN_C, INPUT);
@@ -176,14 +173,17 @@ void setup() {
 
   pinMode(DBG_BTN_PIN, INPUT);
 
+  // Beep happy birthday on startup.
+  Beeper* beeper = new Beeper();
+  beeper->happyBirthday();
+
+  packetSerial.begin(SERIAL_BAUDRATE);
+  packetSerial.setPacketHandler(&onPacketReceived);
+
   // Attaching ENC_PIN_A(=2), Interrupt No. 0
   attachInterrupt(0, isr_encA, CHANGE);
 
   knitter = new Knitter(&packetSerial);
-
-  // Beep happy birthday on startup.
-  Beeper* beeper = new Beeper();
-  beeper->happyBirthday();
 }
 
 
