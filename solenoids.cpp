@@ -62,7 +62,9 @@ void Solenoids::init(void)
         mcp_1.pinMode(i, OUTPUT);
     }
   #endif
-  // No Action needed for SOFT_I2C
+
+  // Initialize solenoid states.
+  setSolenoids(solenoidState);
 }
 
 void Solenoids::setSolenoid(byte solenoid, bool state) {
